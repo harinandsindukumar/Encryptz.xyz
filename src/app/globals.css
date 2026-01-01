@@ -5,7 +5,8 @@
   --foreground: #171717;
 }
 
-@theme inline {
+/* Tailwind CSS v4 custom theme properties */
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
