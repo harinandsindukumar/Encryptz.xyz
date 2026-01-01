@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Encryptz
 
-## Getting Started
+Encryptz is a web app where users create their own private encrypted language and share it with friends using a single unique link.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Create private encrypted languages
+- Encrypt and decrypt text within your languages
+- Share languages with friends using unique links
+- Google authentication for secure access
+- Each language is completely isolated and owned by you
+- No login required for shared language access
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Next.js 14 (App Router)
+- Supabase (Authentication & Database)
+- Tailwind CSS (Styling)
+- TypeScript
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## About the Creator
 
-## Learn More
+This project was developed by Harinand Simdukumar. Connect with me:
 
-To learn more about Next.js, take a look at the following resources:
+- Email: [harinand.dev@gmail.com](mailto:harinand.dev@gmail.com)
+- GitHub: [https://github.com/harinandsindukumar/](https://github.com/harinandsindukumar/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+I'm passionate about leveraging technology and open-source principles to build accessible tools in education and digital expression.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Setup
 
-## Deploy on Vercel
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env.local` file with your Supabase credentials:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## How It Works
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Landing Page**: Simple page with a "Decrypt Your Text" button
+2. **Authentication**: Google login to create and manage languages
+3. **Dashboard**: Create and manage your encrypted languages
+4. **Encryption Pages**: Individual pages for each language with encrypt/decrypt tabs
+5. **Sharing**: Unique links to share languages with friends
+
+## Encryption Method
+
+Each language uses a substitution cipher with a unique mapping based on the language ID. The encryption is deterministic for each language, ensuring that the same input always produces the same output within the same language.
+
+## Security
+
+- Each encrypted language is isolated and owned by a single user
+- Access control prevents unauthorized access
+- Encrypted data is stored securely in Supabase
+- Sharing uses unique, non-guessable links
+
+## License
+
+MIT
+
+## Contact
+
+- **Name**: Harinand Simdukumar
+- **Email**: harinand.dev@gmail.com
+- **GitHub**: [https://github.com/harinandsindukumar/](https://github.com/harinandsindukumar/)
+
+## Feedback & Support
+
+We welcome your feedback and reports! You can:
+
+- Submit feedback through our [Feedback Form](http://localhost:3000/feedback)
+- Report issues through our [Issue Reporter](http://localhost:3000/feedback)
+- Email us directly at harinand.dev@gmail.com
+
+## Database Schema
+
+The application uses Supabase with the following tables:
+
+1. `encryptions` - Stores user-created encrypted languages
+2. `feedback` - Stores user feedback and reports
+
+See the SQL files in the `supabase/` directory for detailed schema information.
