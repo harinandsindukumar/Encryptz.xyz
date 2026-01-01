@@ -82,8 +82,8 @@ export default function SharePage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600"></div>
-          <p className="mt-4 text-gray-600">Loading encryption...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-600"></div>
+          <p className="mt-4 text-amber-700">Loading encryption...</p>
         </div>
       </div>
     );
@@ -92,12 +92,12 @@ export default function SharePage() {
   if (error && !encryption) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center p-8 bg-white rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Error</h2>
-          <p className="text-gray-600 mb-6">{error}</p>
+        <div className="text-center p-8 bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg shadow-md border border-amber-200">
+          <h2 className="text-xl font-semibold text-amber-900 font-serif mb-4">Error</h2>
+          <p className="text-amber-700 mb-6">{error}</p>
           <button 
             onClick={() => window.location.href = '/'}
-            className="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition"
+            className="btn-primary text-white py-2 px-4 rounded-lg transition"
           >
             Go to Home
           </button>
@@ -107,31 +107,31 @@ export default function SharePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 py-8">
       <div className="max-w-4xl mx-auto px-4">
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+        <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg shadow-sm p-6 mb-8 border border-amber-100">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900">{encryption?.name}</h1>
-            <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
+            <h1 className="text-2xl font-bold text-amber-900 font-serif">{encryption?.name}</h1>
+            <span className="bg-amber-100 text-amber-800 text-xs font-medium px-2.5 py-0.5 rounded">
               Shared Language
             </span>
           </div>
-          <p className="text-gray-600 mt-2">
+          <p className="text-amber-800 mt-2">
             Use this shared language to encrypt and decrypt messages
           </p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg shadow-sm p-6 border border-amber-100">
           {/* Tabs */}
-          <div className="flex border-b border-gray-200 mb-6">
+          <div className="flex border-b border-amber-200 mb-6">
             <button
-              className={`py-2 px-4 font-medium text-sm ${activeTab === 'encrypt' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-gray-500 hover:text-gray-700'}`}
+              className={`py-2 px-4 font-medium text-sm ${activeTab === 'encrypt' ? 'text-amber-700 border-b-2 border-amber-600' : 'text-amber-600 hover:text-amber-800'}`}
               onClick={() => setActiveTab('encrypt')}
             >
               Encrypt
             </button>
             <button
-              className={`py-2 px-4 font-medium text-sm ${activeTab === 'decrypt' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-gray-500 hover:text-gray-700'}`}
+              className={`py-2 px-4 font-medium text-sm ${activeTab === 'decrypt' ? 'text-amber-700 border-b-2 border-amber-600' : 'text-amber-600 hover:text-amber-800'}`}
               onClick={() => setActiveTab('decrypt')}
             >
               Decrypt
@@ -140,14 +140,14 @@ export default function SharePage() {
 
           {/* Input Section */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-amber-800 mb-2 font-medium">
               {activeTab === 'encrypt' ? 'Plain Text' : 'Encrypted Text'}
             </label>
             <textarea
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               placeholder={activeTab === 'encrypt' ? 'Enter text to encrypt...' : 'Enter text to decrypt...'}
-              className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 min-h-[150px]"
+              className="w-full p-4 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 min-h-[150px] bg-white"
             />
           </div>
 
@@ -155,7 +155,7 @@ export default function SharePage() {
           <div className="flex justify-center mb-6">
             <button
               onClick={handleProcess}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-lg shadow transition"
+              className="btn-primary text-white font-medium py-3 px-8 rounded-lg shadow transition"
             >
               {activeTab === 'encrypt' ? 'Encrypt Text' : 'Decrypt Text'}
             </button>
@@ -165,12 +165,12 @@ export default function SharePage() {
           {outputText && (
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-amber-800 font-medium">
                   {activeTab === 'encrypt' ? 'Encrypted Result' : 'Decrypted Result'}
                 </label>
                 <button
                   onClick={copyToClipboard}
-                  className="text-sm bg-gray-200 hover:bg-gray-300 text-gray-800 py-1 px-3 rounded transition"
+                  className="text-sm bg-amber-200 hover:bg-amber-300 text-amber-900 py-1 px-3 rounded transition"
                 >
                   Copy
                 </button>
@@ -178,22 +178,22 @@ export default function SharePage() {
               <textarea
                 value={outputText}
                 readOnly
-                className="w-full p-4 border border-gray-300 rounded-lg bg-gray-50 min-h-[150px]"
+                className="w-full p-4 border border-amber-300 rounded-lg bg-amber-50 min-h-[150px]"
               />
             </div>
           )}
 
           {/* Messages */}
           {(error || success) && (
-            <div className={`p-4 rounded-lg mb-6 ${error ? 'bg-red-50 text-red-800' : 'bg-green-50 text-green-800'}`}>
+            <div className={`p-4 rounded-lg mb-6 ${error ? 'bg-red-100 text-red-800 border border-red-200' : 'bg-green-100 text-green-800 border border-green-200'}`}>
               {error || success}
             </div>
           )}
 
           {/* Info */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h3 className="font-medium text-blue-800 mb-2">About this shared language</h3>
-            <p className="text-blue-700 text-sm">
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <h3 className="font-medium text-amber-800 mb-2 font-serif">About this shared language</h3>
+            <p className="text-amber-700 text-sm">
               You are using a shared encrypted language. This language was created by someone else and shared with you.
               You can use this language to communicate with others who have access to this link.
             </p>
