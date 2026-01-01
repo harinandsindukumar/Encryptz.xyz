@@ -1,91 +1,150 @@
 # Encryptz
 
-Encryptz is a web app where users create their own private encrypted language and share it with friends using a single unique link.
+Encryptz is a web application that allows users to create their own private encrypted languages and share them with friends using a single unique link. Built with Next.js and Supabase, it provides a simple and secure way to communicate using custom encryption.
 
 ## Features
 
-- Create private encrypted languages
-- Encrypt and decrypt text within your languages
-- Share languages with friends using unique links
-- Google authentication for secure access
-- Each language is completely isolated and owned by you
-- No login required for shared language access
+- **Create Custom Encrypted Languages**: Generate your own private encryption system
+- **Share with Friends**: Share your encrypted language using a unique link
+- **Easy Encryption/Decryption**: Simple interface for encrypting and decrypting messages
+- **Google Authentication**: Secure login with Google OAuth
+- **Responsive Design**: Works on all devices
+- **No Key Management**: Simple to use without complex key management
 
 ## Tech Stack
 
-- Next.js 14 (App Router)
-- Supabase (Authentication & Database)
-- Tailwind CSS (Styling)
-- TypeScript
+- **Next.js 14**: React framework with App Router
+- **TypeScript**: Type-safe JavaScript
+- **Supabase**: Backend services (authentication & database)
+- **Tailwind CSS**: Styling framework
+- **Vercel**: Deployment platform
 
-## About the Creator
+## Getting Started
 
-This project was developed by Harinand Simdukumar. Connect with me:
+### Prerequisites
 
-- Email: [harinand.dev@gmail.com](mailto:harinand.dev@gmail.com)
-- GitHub: [https://github.com/harinandsindukumar/](https://github.com/harinandsindukumar/)
+- Node.js 18+ 
+- npm or yarn
 
-I'm passionate about leveraging technology and open-source principles to build accessible tools in education and digital expression.
+### Installation
 
-## Setup
+1. Clone the repository:
+```bash
+git clone https://github.com/harinandsindukumar/Encryptz.xyz.git
+cd Encryptz.xyz
+```
 
-1. Clone the repository
 2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env.local` file with your Supabase credentials:
-   ```env
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-   ```
+```bash
+npm install
+```
+
+3. Create a `.env.local` file in the root directory with your specific configuration. You can use the `.env.example` file as a template:
+
+```bash
+cp .env.example .env.local
+```
+
+Then update the values in `.env.local` with your actual Supabase project details.
+
 4. Run the development server:
-   ```bash
-   npm run dev
-   ```
+```bash
+npm run dev
+```
 
-## How It Works
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-1. **Landing Page**: Simple page with a "Decrypt Your Text" button
-2. **Authentication**: Google login to create and manage languages
-3. **Dashboard**: Create and manage your encrypted languages
-4. **Encryption Pages**: Individual pages for each language with encrypt/decrypt tabs
-5. **Sharing**: Unique links to share languages with friends
+## Environment Variables
 
-## Encryption Method
+The application requires the following environment variables to connect with Supabase. A `.env.example` file is provided as a template:
 
-Each language uses a substitution cipher with a unique mapping based on the language ID. The encryption is deterministic for each language, ensuring that the same input always produces the same output within the same language.
+- `NEXT_PUBLIC_SUPABASE_URL`: Your Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Your Supabase anonymous key
+- `SUPABASE_SERVICE_ROLE_KEY`: Your Supabase service role key
+- `NEXT_PUBLIC_GOOGLE_CLIENT_ID`: Your Google OAuth client ID (optional, if using Google auth)
+- `NEXT_PUBLIC_GOOGLE_CLIENT_SECRET`: Your Google OAuth client secret (optional, if using Google auth)
 
-## Security
-
-- Each encrypted language is isolated and owned by a single user
-- Access control prevents unauthorized access
-- Encrypted data is stored securely in Supabase
-- Sharing uses unique, non-guessable links
-
-## License
-
-MIT
-
-## Contact
-
-- **Name**: Harinand Simdukumar
-- **Email**: harinand.dev@gmail.com
-- **GitHub**: [https://github.com/harinandsindukumar/](https://github.com/harinandsindukumar/)
-
-## Feedback & Support
-
-We welcome your feedback and reports! You can:
-
-- Submit feedback through our [Feedback Form](http://localhost:3000/feedback)
-- Report issues through our [Issue Reporter](http://localhost:3000/feedback)
-- Email us directly at harinand.dev@gmail.com
+These are required for authentication and database operations.
 
 ## Database Schema
 
-The application uses Supabase with the following tables:
+The application uses the following tables in Supabase. You can find the detailed schema in the `supabase/` directory:
 
-1. `encryptions` - Stores user-created encrypted languages
-2. `feedback` - Stores user feedback and reports
+### encryptions table
+- `id`: UUID (Primary Key)
+- `name`: Text (Name of the encryption)
+- `user_id`: UUID (Foreign Key to auth.users)
+- `created_at`: Timestamp (Default: now())
 
-See the SQL files in the `supabase/` directory for detailed schema information.
+### feedback table
+- `id`: UUID (Primary Key, Default: gen_random_uuid())
+- `name`: Text (User's name)
+- `email`: Text (User's email)
+- `subject`: Text (Feedback subject)
+- `message`: Text (Feedback message)
+- `type`: Text (Feedback type: 'feedback' or 'report')
+- `created_at`: Timestamp (Default: now())
+- `status`: Text (Default: 'pending')
+
+### Supabase Setup
+
+To set up the database in your Supabase project, you can use the SQL schema file located at `supabase/feedback_schema.sql`.
+
+## API Routes
+
+- `GET /api/encryptions`: Get all encryptions for the authenticated user
+- `POST /api/encryptions/create`: Create a new encryption
+- `GET /api/encryptions/[id]`: Get a specific encryption
+- `DELETE /api/encryptions/[id]`: Delete a specific encryption
+- `POST /api/feedback`: Submit feedback or report an issue
+
+## Project Structure
+
+```
+src/
+├── app/                    # Next.js 14 App Router pages
+│   ├── api/                # API routes
+│   ├── dashboard/          # User dashboard
+│   ├── encrypt/[id]/       # Encryption interface
+│   ├── share/[id]/         # Shared encryption interface
+│   ├── feedback/           # Feedback form
+│   ├── privacy/            # Privacy policy
+│   ├── terms/              # Terms of service
+│   ├── disclaimer/         # Disclaimer
+│   └── globals.css         # Global styles
+├── components/             # React components
+├── context/                # React context providers
+├── lib/                    # Utility functions
+└── utils/                  # Utility modules
+```
+
+## Contributing
+
+We welcome contributions to Encryptz! Here's how you can help:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Commit your changes (`git commit -m 'Add some amazing feature'`)
+5. Push to the branch (`git push origin feature/amazing-feature`)
+6. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+- Harinand Simdukumar: [harinandsindukumarkg@gmail.com](mailto:harinandsindukumarkg@gmail.com)
+- GitHub: [https://github.com/harinandsindukumar/](https://github.com/harinandsindukumar/)
+
+## Acknowledgments
+
+- Next.js for the amazing React framework
+- Supabase for the backend services
+- Tailwind CSS for the styling framework
+- All contributors who help make this project better
+
+---
+
+Built with ❤️ by [Harinand Simdukumar](https://github.com/harinandsindukumar/)
